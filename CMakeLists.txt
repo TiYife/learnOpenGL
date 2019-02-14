@@ -42,5 +42,8 @@ target_link_libraries(hello_texture ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${Open
 add_executable(hello_transform hello_transform/hello_transform.cpp)
 target_link_libraries(hello_transform ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${OpenCV_LIBS})
 
+add_executable(hello_coordinate hello_coordinate/hello_coordinate.cpp)
+target_link_libraries(hello_coordinate ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${OpenCV_LIBS})
+
 add_executable(read_mesh mesh/mesh.cpp)
 target_link_libraries(read_mesh ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES})
