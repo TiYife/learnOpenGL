@@ -16,6 +16,10 @@
 #include "../glm/gtc/matrix_transform.hpp"
 #include "../glm/gtc/type_ptr.hpp"
 
+//opencv
+#include <cv.h>
+#include <highgui.h>
+
 // Other includes
 #include "Shader.h"
 
@@ -25,6 +29,38 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 // Window dimensions
 const GLuint WIDTH = 800, HEIGHT = 600;
+
+void loadTextrue(char* name, GLuint& imageTexture)
+{
+    cv::Mat image = cv::imread(name);
+    if(image.empty()){
+        std::cout << "image empty" << std::endl;
+    }
+    else {
+        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+        glGenTextures(1, &imageTexture);
+        glBindTexture(GL_TEXTURE_2D, imageTexture);
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_BORDER);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+        cv::cvtColor(image, image, CV_RGB2BGR);
+        glTexImage2D(GL_TEXTURE_2D,         // Type of texture
+                     0,                   // Pyramid level (for mip-mapping) - 0 is the top level
+                     GL_RGB,              // Internal colour format to convert to
+                     image.cols,          // Image width  i.e. 640 for Kinect in standard mode
+                     image.rows,          // Image height i.e. 480 for Kinect in standard mode
+                     0,                   // Border width in pixels (can either be 1 or 0)
+                     GL_RGB,              // Input image format (i.e. GL_RGB, GL_RGBA, GL_BGR etc.)
+                     GL_UNSIGNED_BYTE,    // Image data type
+                     image.ptr());        // The actual image data itself
+
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
+}
+
 
 // The MAIN function, from here we start the application and run the game loop
 int main()
@@ -36,6 +72,7 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);  // MAC
 
     // Create a GLFWwindow object that we can use for GLFW's functions
     GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", nullptr, nullptr);
@@ -54,7 +91,7 @@ int main()
 
 
     // Build and compile our shader program
-    Shader ourShader("path/to/shaders/transformations.vs", "path/to/shaders/transformations.frag");
+    Shader ourShader("../hello_transform/default.vs", "../hello_transform/default.frag");
 
 
     // Set up vertex data (and buffer(s)) and attribute pointers
@@ -98,42 +135,8 @@ int main()
     // Load and create a texture
     GLuint texture1;
     GLuint texture2;
-    // ====================
-    // Texture 1
-    // ====================
-    glGenTextures(1, &texture1);
-    glBindTexture(GL_TEXTURE_2D, texture1); // All upcoming GL_TEXTURE_2D operations now have effect on our texture object
-    // Set our texture parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    // Set texture filtering
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    // Load, create texture and generate mipmaps
-    int width, height;
-    unsigned char* image = SOIL_load_image("container.jpg", &width, &height, 0, SOIL_LOAD_RGB);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-    glGenerateMipmap(GL_TEXTURE_2D);
-    SOIL_free_image_data(image);
-    glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture when done, so we won't accidentily mess up our texture.
-    // ===================
-    // Texture 2
-    // ===================
-    glGenTextures(1, &texture2);
-    glBindTexture(GL_TEXTURE_2D, texture2);
-    // Set our texture parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    // Set texture filtering
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    // Load, create texture and generate mipmaps
-    image = SOIL_load_image("awesomeface.png", &width, &height, 0, SOIL_LOAD_RGB);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-    glGenerateMipmap(GL_TEXTURE_2D);
-    SOIL_free_image_data(image);
-    glBindTexture(GL_TEXTURE_2D, 0);
-
+    loadTextrue("../hello_transform/container.jpg",texture1);
+    loadTextrue("../hello_transform/awesomeface.png",texture2);
 
     // Game loop
     while (!glfwWindowShouldClose(window))
