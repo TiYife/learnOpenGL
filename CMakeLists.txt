@@ -45,5 +45,11 @@ target_link_libraries(hello_transform ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${Op
 add_executable(hello_coordinate hello_coordinate/hello_coordinate.cpp)
 target_link_libraries(hello_coordinate ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${OpenCV_LIBS})
 
+add_executable(hello_camera hello_camera/hello_camera.cpp)
+target_link_libraries(hello_camera ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${OpenCV_LIBS})
+
+add_executable(hello_camera2 hello_camera/hello_camera2.cpp)
+target_link_libraries(hello_camera2 ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${OpenCV_LIBS})
+
 add_executable(read_mesh mesh/mesh.cpp)
 target_link_libraries(read_mesh ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES})

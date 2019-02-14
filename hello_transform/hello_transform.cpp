@@ -91,7 +91,7 @@ int main()
 
 
     // Build and compile our shader program
-    Shader ourShader("../hello_transform/default.vs", "../hello_transform/default.frag");
+    Shader ourShader("../hello_camera/default.vs", "../hello_camera/default.frag");
 
 
     // Set up vertex data (and buffer(s)) and attribute pointers
@@ -135,8 +135,8 @@ int main()
     // Load and create a texture
     GLuint texture1;
     GLuint texture2;
-    loadTextrue("../hello_transform/container.jpg",texture1);
-    loadTextrue("../hello_transform/awesomeface.png",texture2);
+    loadTextrue("../hello_camera/container.jpg",texture1);
+    loadTextrue("../hello_camera/awesomeface.png",texture2);
 
     // Game loop
     while (!glfwWindowShouldClose(window))
