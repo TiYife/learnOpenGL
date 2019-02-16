@@ -33,7 +33,7 @@ target_link_libraries(hello_window ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES})
 add_executable(hello_triangle hello_triangle/hello_triangle.cpp)
 target_link_libraries(hello_triangle ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES})
 
-add_executable(hello_shader hello_shader/hello_shader.cpp hello_shader/Shader.h hello_transform/hello_transform.cpp)
+add_executable(hello_shader hello_shader/hello_shader.cpp)
 target_link_libraries(hello_shader ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES})
 
 add_executable(hello_texture hello_texture/hello_texture.cpp)
@@ -45,11 +45,17 @@ target_link_libraries(hello_transform ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${Op
 add_executable(hello_coordinate hello_coordinate/hello_coordinate.cpp)
 target_link_libraries(hello_coordinate ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${OpenCV_LIBS})
 
+add_executable(hello_coordinate2 hello_coordinate/hello_coordinate2.cpp)
+target_link_libraries(hello_coordinate2 ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${OpenCV_LIBS})
+
 add_executable(hello_camera hello_camera/hello_camera.cpp)
 target_link_libraries(hello_camera ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${OpenCV_LIBS})
 
 add_executable(hello_camera2 hello_camera/hello_camera2.cpp)
 target_link_libraries(hello_camera2 ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${OpenCV_LIBS})
+
+add_executable(hello_color hello_color/hello_color.cpp)
+target_link_libraries(hello_color ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${OpenCV_LIBS})
 
 add_executable(read_mesh mesh/mesh.cpp)
 target_link_libraries(read_mesh ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES})
