@@ -58,6 +58,7 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     // Create a GLFWwindow object that we can use for GLFW's functions
     GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", nullptr, nullptr);
@@ -69,7 +70,7 @@ int main()
     glfwSetScrollCallback(window, scroll_callback);
 
     // GLFW Options
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     // Set this to true so GLEW knows to use a modern approach to retrieving function pointers and extensions
     glewExperimental = GL_TRUE;
@@ -84,8 +85,8 @@ int main()
 
 
     // Build and compile our shader program
-    Shader lightingShader("path/to/shaders/lighting.vs", "path/to/shaders/lighting.frag");
-    Shader lampShader("path/to/shaders/lamp.vs", "path/to/shaders/lamp.frag");
+    Shader lightingShader("../hello_color/lighting.vs", "../hello_color/lighting.frag");
+    Shader lampShader("../hello_color/lamp.vs", "../hello_color/lamp.frag");
 
     // Set up vertex data (and buffer(s)) and attribute pointers
     GLfloat vertices[] = {
