@@ -57,5 +57,8 @@ target_link_libraries(hello_camera2 ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${Open
 add_executable(hello_color hello_color/hello_color.cpp)
 target_link_libraries(hello_color ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${OpenCV_LIBS})
 
+add_executable(hello_lighting hello_lighting/hello_lighting.cpp)
+target_link_libraries(hello_lighting ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${OpenCV_LIBS})
+
 add_executable(read_mesh mesh/mesh.cpp)
 target_link_libraries(read_mesh ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES})
