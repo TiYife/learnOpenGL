@@ -60,5 +60,8 @@ target_link_libraries(hello_color ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${OpenCV
 add_executable(hello_lighting hello_lighting/hello_lighting.cpp)
 target_link_libraries(hello_lighting ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${OpenCV_LIBS})
 
+add_executable(hello_lighting2 hello_lighting/hello_lighting2.cpp)
+target_link_libraries(hello_lighting2 ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${OpenCV_LIBS})
+
 add_executable(read_mesh mesh/mesh.cpp)
 target_link_libraries(read_mesh ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES})

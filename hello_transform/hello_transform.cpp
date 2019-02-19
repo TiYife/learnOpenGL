@@ -91,7 +91,7 @@ int main()
 
 
     // Build and compile our shader program
-    Shader ourShader("../hello_camera/default.vs", "../hello_camera/default.frag");
+    Shader ourShader("../hello_transform/default.vs", "../hello_transform/default.frag");
 
 
     // Set up vertex data (and buffer(s)) and attribute pointers
